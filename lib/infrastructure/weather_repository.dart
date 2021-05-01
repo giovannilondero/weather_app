@@ -47,6 +47,7 @@ class WeatherRepository implements IWeatherRepository {
       _apiUrl,
       queryParameters: <String, dynamic>{
         'appid': _apiKey,
+        'units': 'metric',
         ...queryParameters,
       },
     );
