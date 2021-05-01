@@ -9,7 +9,7 @@ part 'weather_api_response.g.dart';
 @freezed
 class WeatherApiResponse with _$WeatherApiResponse {
   const factory WeatherApiResponse({
-    required final int cod,
+    required final String cod,
     required final int message,
     required final int cnt,
     required final List<DayWeatherData> list,
@@ -26,11 +26,11 @@ class DayWeatherData with _$DayWeatherData {
     required final int dt,
     required final MainData main,
     required final List<WeatherData> weather,
-    required final CloudsData clouds,
-    required final WindData wind,
+    final CloudsData? clouds,
+    final WindData? wind,
     required final int visibility,
     required final double pop,
-    required final RainData rain,
+    final RainData? rain,
     required final SysData sys,
     @JsonKey(name: 'dt_txt') required final String dtTxt,
   }) = _DayWeatherData;
@@ -131,8 +131,8 @@ class ResponseCity with _$ResponseCity {
 @freezed
 class Coordinates with _$Coordinates {
   const factory Coordinates({
-    required final double latitude,
-    required final double longitude,
+    @JsonKey(name: 'lat') required final double latitude,
+    @JsonKey(name: 'lon') required final double longitude,
   }) = _Coordinates;
 
   factory Coordinates.fromJson(Map<String, dynamic> json) =>
