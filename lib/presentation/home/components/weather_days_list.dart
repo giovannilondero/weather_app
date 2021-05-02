@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/domain/weather_api_response.dart';
+import 'package:weather_app/domain/full_day_weather_details.dart';
 import 'package:weather_app/presentation/_components/weather_icon.dart';
 import 'package:weather_app/presentation/home/components/weather_day.dart';
 
 class WeatherDaysList extends StatelessWidget {
-  final List<DayWeatherData> days;
+  final List<FullDayWeatherDetails> days;
   const WeatherDaysList({
     Key? key,
     required this.days,
@@ -16,16 +16,16 @@ class WeatherDaysList extends StatelessWidget {
       children: days
           .map(
             (day) => WeatherDay(
-              dateTime: DateTime.fromMillisecondsSinceEpoch(day.dt * 1000),
-              icon: day.weather.isNotEmpty
+              dateTime: day.date,
+              icon: day.icon != null
                   ? WeatherIcon(
-                      code: day.weather.elementAt(0).icon,
+                      code: day.icon!,
                       width: 50,
                       height: 50,
                     )
                   : null,
-              minTemp: day.main.tempMin,
-              maxTemp: day.main.tempMax,
+              minTemp: day.tempMin,
+              maxTemp: day.tempMax,
             ),
           )
           .toList(),

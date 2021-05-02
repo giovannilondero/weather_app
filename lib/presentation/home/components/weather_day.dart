@@ -18,10 +18,10 @@ class WeatherDay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
       padding: const EdgeInsets.symmetric(horizontal: 24),
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        // color: Colors.grey[300],
+        // color: Colors.blueGrey[50],
         borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
@@ -34,7 +34,7 @@ class WeatherDay extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              '${minTemp ?? '-'}° / ${maxTemp ?? '-'} °C',
+              '${{minTemp, maxTemp}.map((e) => e ?? '-').join(' / ')} °C',
               textAlign: TextAlign.right,
             ),
           ),

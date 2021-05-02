@@ -18,6 +18,13 @@ class WeatherIcon extends StatelessWidget {
       'https://openweathermap.org/img/wn/$code@2x.png',
       width: width,
       height: height,
+      // Slightly improve visibility of the images over the background
+      // color: Colors.blue.shade900.withOpacity(0.1),
+      color: Colors.brown.shade900.withOpacity(0.08),
+      colorBlendMode: BlendMode.srcATop,
+      // semanticLabel: ,
+      // loadingBuilder: ,
+      // errorBuilder: ,
     );
   }
 }
