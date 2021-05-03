@@ -34,7 +34,10 @@ class WeatherDay extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Text(
-              '${{minTemp, maxTemp}.map((e) => e ?? '-').join(' / ')} °C',
+              '${{
+                minTemp?.round(),
+                maxTemp?.round()
+              }.map((e) => e ?? '-').join(' / ')} °C',
               textAlign: TextAlign.right,
             ),
           ),

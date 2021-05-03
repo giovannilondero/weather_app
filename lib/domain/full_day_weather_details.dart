@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:weather_app/domain/day_weather.dart';
 
@@ -12,20 +14,63 @@ class FullDayWeatherDetails with _$FullDayWeatherDetails {
 
   const FullDayWeatherDetails._();
 
-  // temp max e temp min giornata (main>tempMin, main>tempMax)
-  // vento, precipitazioni, umidità, pressione (wind>speed, wind>deg, pop, main>humidity, main>pressure)
-  // orari giornata, ognuno con suo tempo e temp
-  // TODO: prendere gli effettivi valori qui
-  double get tempMax => 2;
-  double get tempMin => 1;
+  /// Get the highest temperature of the day
+  double get tempMax => dayDetails.fold<double>(
+        double.negativeInfinity,
+        (max, day) => math.max(max, day.main.tempMax),
+      );
 
-  double get windSpeed => 2;
-  double get windDeg => 2;
+  /// Get the lowest temperature of the day
+  double get tempMin => dayDetails.fold<double>(
+        double.infinity,
+        (min, day) => math.min(min, day.main.tempMin),
+      );
 
-  double get pop => 2;
+  /// Get the average wind speed of the day
+  double get windSpeed => _averageOf((day) => day.wind?.speed ?? 0);
 
-  double get humidity => 2;
-  double get pressure => 2;
+  /// Get the average wind direction (in degrees) of the day
+  double get windDeg => _averageOf((day) => day.wind?.deg ?? 0);
 
-  String? get icon => '10d';
+  /// Get the average probability of precipitation of the day
+  double get pop => _averageOf((day) => day.pop);
+
+  /// Get the average humidity of the day
+  double get humidity => _averageOf((day) => day.main.humidity.toDouble());
+
+  /// Get the average pressure of the day
+  double get pressure => _averageOf((day) => day.main.pressure.toDouble());
+
+  /// Get the icon which appears the most during the day.
+  /// If multiple icons appear the same number of times, the first will be shown.
+  String? get icon => dayDetails
+      .fold<Map<String, int>>({}, (map, day) {
+        if (day.weather.isEmpty) {
+          return map;
+        }
+
+        final _icon = day.weather.elementAt(0).icon;
+        map.update(
+          _icon,
+          (value) => value + 1,
+          ifAbsent: () => 1,
+        );
+
+        return map;
+      })
+      .entries
+      .fold<MapEntry<String, int>>(
+        const MapEntry('', 0),
+        (previousValue, element) =>
+            element.value > previousValue.value ? element : previousValue,
+      )
+      .key;
+
+  /// Get the average of a property from FullDayWeatherDetails.dayDetails.
+  double _averageOf(double Function(DayWeatherData) callback) =>
+      dayDetails.fold<double>(
+        0,
+        (total, day) => total + callback(day),
+      ) /
+      dayDetails.length;
 }
