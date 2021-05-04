@@ -33,10 +33,11 @@ class FullDayWeatherDetails with _$FullDayWeatherDetails {
   double get windDeg => _averageOf((day) => day.wind?.deg ?? 0);
 
   /// Get the average probability of precipitation of the day
-  double get pop => _averageOf((day) => day.pop);
+  int get popPercentage => (_averageOf((day) => day.pop) * 100).toInt();
 
   /// Get the average humidity of the day
-  double get humidity => _averageOf((day) => day.main.humidity.toDouble());
+  int get humidityPercentage =>
+      _averageOf((day) => day.main.humidity.toDouble()).toInt();
 
   /// Get the average pressure of the day
   double get pressure => _averageOf((day) => day.main.pressure.toDouble());
@@ -67,10 +68,13 @@ class FullDayWeatherDetails with _$FullDayWeatherDetails {
       .key;
 
   /// Get the average of a property from FullDayWeatherDetails.dayDetails.
-  double _averageOf(double Function(DayWeatherData) callback) =>
-      dayDetails.fold<double>(
-        0,
-        (total, day) => total + callback(day),
-      ) /
-      dayDetails.length;
+  double _averageOf(double Function(DayWeatherData) callback) {
+    final average = dayDetails.fold<double>(
+          0,
+          (total, day) => total + callback(day),
+        ) /
+        dayDetails.length;
+
+    return double.parse(average.toStringAsFixed(2));
+  }
 }
