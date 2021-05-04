@@ -1,3 +1,7 @@
+- [Weather app](#weather-app)
+  - [Use cases](#use-cases)
+  - [Commands](#commands)
+
 # Weather app
 
 This is a functioning example of an app to check the weather for the next 5 days.
@@ -18,6 +22,12 @@ Bonuses:
 
 Build:
 
-```base
+```bash
 flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+Sort imports:
+
+```bash
+flutter pub run import_sorter:main
 ```
