@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+// Project imports:
 import 'package:weather_app/domain/day_weather.dart';
 
 part 'weather_api_response.freezed.dart';

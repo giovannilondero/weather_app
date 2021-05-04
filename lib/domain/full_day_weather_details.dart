@@ -1,6 +1,10 @@
+// Dart imports:
 import 'dart:math' as math;
 
+// Package imports:
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+// Project imports:
 import 'package:weather_app/domain/day_weather.dart';
 
 part 'full_day_weather_details.freezed.dart';

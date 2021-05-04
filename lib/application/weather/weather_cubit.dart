@@ -1,5 +1,8 @@
+// Package imports:
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
+// Project imports:
 import 'package:weather_app/domain/day_weather.dart';
 import 'package:weather_app/domain/full_day_weather_details.dart';
 import 'package:weather_app/domain/i_weather_repository.dart';

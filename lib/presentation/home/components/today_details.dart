@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:intl/intl.dart';
+
+// Project imports:
 import 'package:weather_app/domain/full_day_weather_details.dart';
 import 'package:weather_app/domain/weather_api_response.dart';
 import 'package:weather_app/presentation/_components/weather_icon.dart';

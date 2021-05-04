@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:weather_app/domain/full_day_weather_details.dart';
 import 'package:weather_app/presentation/home/components/weather_day.dart';
 

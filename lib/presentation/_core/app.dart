@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+// Project imports:
 import 'package:weather_app/application/weather/weather_cubit.dart';
 import 'package:weather_app/infrastructure/weather_repository.dart';
 import 'package:weather_app/presentation/home/home.dart';
