@@ -1,6 +1,3 @@
-// Flutter imports:
-import 'dart:math' show pi;
-
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -28,11 +25,7 @@ class TodayDetails extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
-          // City
-          Text(
-            city.name.toUpperCase(),
-            style: textTheme.headline6,
-          ),
+          const Spacer(),
           const SizedBox(height: 32),
           // Date
           Text(
@@ -104,6 +97,7 @@ class TodayDetails extends StatelessWidget {
               ],
             ),
           ),
+          const Spacer(flex: 3),
         ],
       ),
     );

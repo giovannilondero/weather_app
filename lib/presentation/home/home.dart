@@ -1,16 +1,52 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 
-// Package imports:
-import 'package:flutter_bloc/flutter_bloc.dart';
-
 // Project imports:
-import 'package:weather_app/application/weather/weather_cubit.dart';
-import 'package:weather_app/presentation/home/components/day_details.dart';
 import 'package:weather_app/presentation/home/components/search_bar.dart';
+import 'package:weather_app/presentation/home/components/weather_days_list.dart';
+import 'package:weather_app/presentation/home/components/weather_days_pageview.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  final weatherDaysPageViewController = PageController();
+  final weatherDaysListController = ScrollController();
+  int selectedDayIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    weatherDaysPageViewController.addListener(updateSelectedDayIndex);
+  }
+
+  @override
+  void dispose() {
+    weatherDaysPageViewController.removeListener(updateSelectedDayIndex);
+    super.dispose();
+  }
+
+  void updateSelectedDayIndex() {
+    final index = weatherDaysPageViewController.page;
+    if (index != null && index.round() != selectedDayIndex) {
+      setState(() {
+        selectedDayIndex = index.round();
+      });
+    }
+  }
+
+  void navigateToDay(int index) {
+    weatherDaysPageViewController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.decelerate,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,33 +58,22 @@ class Home extends StatelessWidget {
           style: const TextStyle(color: Color(0xff3d4b50)),
           child: Column(
             children: [
-              // TODO: colonna con 3 elementi (search, giorno, lista giorni)
-              // TODO: UI giorno
-              // TODO: UI lista giorni
-              // TODO: controller per cambiare i giorni
-              // TODO: separare bene i widget
               // TODO: aggiungere pulsante per trovare posizione all'inizio, ma solo quando non ho ancora acconsentito
               // TODO: prendere subito la posizione corrente se posso
               const SearchBar(),
-              context.watch<WeatherCubit>().state.maybeWhen(
-                    loaded: (days, city) => Expanded(
-                      child: PageView(
-                        children: days
-                            .map(
-                              (day) => TodayDetails(
-                                day: day,
-                                city: city,
-                              ),
-                            )
-                            .toList(),
-                      ),
-                    ),
-                    // WeatherDaysList(days: nextDays),
-                    loading: () => const CircularProgressIndicator(),
-                    orElse: () => const SizedBox.shrink(),
-                  ),
-              // Let the colum scroll a bit longer when there's a system UI element at the bottom (e.g. on iPhoneX and later)
-              SizedBox(height: MediaQuery.of(context).padding.bottom),
+              Expanded(
+                flex: 3,
+                child: WeatherDaysPageView(
+                  controller: weatherDaysPageViewController,
+                ),
+              ),
+              Expanded(
+                child: WeatherDaysList(
+                  selectedIndex: selectedDayIndex,
+                  controller: weatherDaysListController,
+                  onTap: navigateToDay,
+                ),
+              ),
             ],
           ),
         ),
