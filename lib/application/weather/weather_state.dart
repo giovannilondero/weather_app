@@ -6,8 +6,7 @@ abstract class WeatherState with _$WeatherState {
   const factory WeatherState.loading() = _Loading;
   const factory WeatherState.error(String error) = _Error;
   const factory WeatherState.loaded({
-    required FullDayWeatherDetails today,
-    required List<FullDayWeatherDetails> nextDays,
+    required List<FullDayWeatherDetails> days,
     required ResponseCity city,
   }) = _Loaded;
 }

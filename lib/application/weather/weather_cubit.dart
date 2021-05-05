@@ -28,7 +28,10 @@ class WeatherCubit extends Cubit<WeatherState> {
   }
 
   void emitWithApiResponse(WeatherApiResponse response) {
+    // * initially this was used to group the 3h-info for every day, but
+    // * a change in the UI made this useless in the end
     final dayWeatherDetailsList = response.list
+        // Group data for every day
         .fold(
           <DateTime, List<DayWeatherData>>{},
           (Map<DateTime, List<DayWeatherData>> map, element) {
@@ -46,6 +49,7 @@ class WeatherCubit extends Cubit<WeatherState> {
             return map;
           },
         )
+        // Create a FullDayWeatherDetails which contains all the grouped data for every day
         .entries
         .map((e) => FullDayWeatherDetails(
               date: e.key,
@@ -54,8 +58,7 @@ class WeatherCubit extends Cubit<WeatherState> {
         .toList();
 
     emit(WeatherState.loaded(
-      today: dayWeatherDetailsList.first,
-      nextDays: dayWeatherDetailsList.skip(1).toList(),
+      days: dayWeatherDetailsList,
       city: response.city,
     ));
   }
