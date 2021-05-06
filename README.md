@@ -4,6 +4,7 @@
   - [Development](#development)
   - [Commands](#commands)
     - [Build runner](#build-runner)
+    - [Create splashscreen](#create-splashscreen)
 
 # Weather app
 
@@ -47,8 +48,14 @@ flutter pub run build_runner build --delete-conflicting-outputs
 flutter pub run import_sorter:main
 ```
 
-### Create launcher icons:
+### Create launcher icons
 
 ```bash
 flutter pub run flutter_launcher_icons:main
+```
+
+### Create splashscreen
+
+```bash
+flutter pub run flutter_native_splash:create
 ```
