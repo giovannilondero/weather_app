@@ -58,7 +58,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    const searchInputHeight = 50; // TODO: move this const
+    const searchInputHeight = 50;
 
     return BlocListener<WeatherCubit, WeatherState>(
       listener: (context, state) {

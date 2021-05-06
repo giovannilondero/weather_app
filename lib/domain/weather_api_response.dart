@@ -7,9 +7,6 @@ import 'package:weather_app/domain/day_weather.dart';
 part 'weather_api_response.freezed.dart';
 part 'weather_api_response.g.dart';
 
-// TODO: separare
-// TODO: controllare, sicuramente non devono essere tutti required, alcuni saranno nullable
-
 @freezed
 class WeatherApiResponse with _$WeatherApiResponse {
   const factory WeatherApiResponse({

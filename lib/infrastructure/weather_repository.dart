@@ -26,8 +26,6 @@ class WeatherRepository implements IWeatherRepository {
       'q': queryValues,
     });
 
-    // TODO: gestire errore o response null
-
     return WeatherApiResponse.fromJson(response ?? <String, dynamic>{});
   }
 
@@ -38,8 +36,6 @@ class WeatherRepository implements IWeatherRepository {
       'lat': coordinates.latitude,
       'lon': coordinates.longitude,
     });
-
-    // TODO: gestire errore o response null
 
     return WeatherApiResponse.fromJson(response ?? <String, dynamic>{});
   }

@@ -21,9 +21,6 @@ class WeatherCubit extends Cubit<WeatherState> {
 
     final response = await weatherRepository.getWeatherByCity(name: cityName);
 
-    // TODO: gestire errori
-    // TODO: gestire geolocation
-
     emitWithApiResponse(response);
   }
 
