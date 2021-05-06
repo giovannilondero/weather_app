@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 // Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -68,39 +69,46 @@ class _HomeState extends State<Home> {
         // having a selectedDay in the bottom list different than the details in PageView.
         resetSelectedDayIndex();
       },
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size(double.infinity, 200),
-          child: Padding(
-            padding: EdgeInsets.only(top: mediaQuery.padding.top),
-            child: const SearchBar(),
-          ),
+      child: AnnotatedRegion<SystemUiOverlayStyle>(
+        // Set System UI text to dark
+        value: const SystemUiOverlayStyle(
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.light,
         ),
-        body: SafeArea(
-          bottom: false, // set at the bottom of the scroll view
-          child: DefaultTextStyle(
-            style: const TextStyle(color: Color(0xff3d4b50)),
-            child: SingleChildScrollView(
-              child: SizedBox(
-                height: mediaQuery.size.height -
-                    mediaQuery.padding.top -
-                    searchInputHeight,
-                child: Column(
-                  children: [
-                    Expanded(
-                      flex: 3,
-                      child: WeatherDaysPageView(
-                        controller: weatherDaysPageViewController,
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: const Size(double.infinity, 200),
+            child: Padding(
+              padding: EdgeInsets.only(top: mediaQuery.padding.top),
+              child: const SearchBar(),
+            ),
+          ),
+          body: SafeArea(
+            bottom: false, // set at the bottom of the scroll view
+            child: DefaultTextStyle(
+              style: const TextStyle(color: Color(0xff3d4b50)),
+              child: SingleChildScrollView(
+                child: SizedBox(
+                  height: mediaQuery.size.height -
+                      mediaQuery.padding.top -
+                      searchInputHeight,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        flex: 3,
+                        child: WeatherDaysPageView(
+                          controller: weatherDaysPageViewController,
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: WeatherDaysList(
-                        selectedIndex: selectedDayIndex,
-                        controller: weatherDaysListController,
-                        onTap: navigateToDay,
+                      Expanded(
+                        child: WeatherDaysList(
+                          selectedIndex: selectedDayIndex,
+                          controller: weatherDaysListController,
+                          onTap: navigateToDay,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
