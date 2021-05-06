@@ -31,3 +31,9 @@ Sort imports:
 ```bash
 flutter pub run import_sorter:main
 ```
+
+Create launcher icons:
+
+```bash
+flutter pub run flutter_launcher_icons:main
+```
