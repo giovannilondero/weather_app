@@ -1,9 +1,11 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_app/application/weather/weather_cubit.dart';
 
 // Project imports:
+import 'package:weather_app/application/weather/weather_cubit.dart';
 import 'package:weather_app/presentation/home/components/search_bar.dart';
 import 'package:weather_app/presentation/home/components/weather_days_list.dart';
 import 'package:weather_app/presentation/home/components/weather_days_pageview.dart';
