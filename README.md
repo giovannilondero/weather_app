@@ -4,6 +4,8 @@
   - [Development](#development)
   - [Commands](#commands)
     - [Build runner](#build-runner)
+    - [Sort imports](#sort-imports)
+    - [Create launcher icons](#create-launcher-icons)
     - [Create splashscreen](#create-splashscreen)
 
 # Weather app
@@ -42,13 +44,13 @@ NOTE: this app has been developed and tested on iPhone 12 Pro Max Simulator (iOS
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
-### Sort imports
+### Sort imports
 
 ```bash
 flutter pub run import_sorter:main
 ```
 
-### Create launcher icons
+### Create launcher icons
 
 ```bash
 flutter pub run flutter_launcher_icons:main
